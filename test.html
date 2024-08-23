@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form with Error Validation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: hsl(148, 38%, 91%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .contact-form {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+    .contact-form h2 {
+      margin-bottom: 15px;
+      font-size: 24px;
+      color: #333;
+    }
+    .contact-form input[type="text"], 
+    .contact-form input[type="email"], 
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    .contact-form input.error, 
+    .contact-form textarea.error {
+      border-color: red;
+    }
+    .contact-form .error-message {
+      color: red;
+      font-size: 12px;
+      margin: 0;
+    }
+    .contact-form input[type="radio"] {
+      margin-right: 10px;
+    }
+    .contact-form label {
+      font-size: 16px;
+      margin-bottom: 5px;
+      display: inline-block;
+      color: #050f05;
+    }
+    .contact-form .query-type {
+      margin: 10px 0;
+    }
+    .contact-form .form-group {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+    .contact-form .form-group:first-of-type{
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .contact-form .form-field {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+    }
+    .contact-form button#query-button {
+      display: flex;
+      align-items: center;
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+    .contact-form .consent {
+      display: flex;
+      align-items: baseline;
+    }
+    .contact-form .consent input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    .contact-form button[type="submit"] {
+      background-color: #04765F;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 15px;
+    }
+    .box {
+      background-color: #243139;
+      color: #FFF;
+      padding: 15px;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 100%;
+      margin-bottom: 20px;
+      text-align: left;
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .box-container {
+      display: flex;
+      align-items: left;
+      justify-content: left;
+    }
+    .hidden {
+      display: none;
+    }
+    .note{
+      margin-top: -10px;
+    }
+    .name-fields {
+      display: flex;
+      justify-content: space-between;
+    }
+    .name-fields .form-field {
+      display: flex;
+      flex: 1;
+      margin-right: 10px;
+    }
+    .name-fields .form-field:last-of-type {
+      margin-right: 0;
+    }
+    #fname, #lname {
+      display: block;
+      width: 100%;
+    }
+    .name-fields .form-field label {
+      display: block;
+      margin-bottom: 5px;
+      width: 100%;
+    }
+    @media only screen and (max-width: 768px) {
+      .container {
+        width: 100%;
+        padding: 10px;
+      }
+      .box {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+    <div class="box hidden" id="successMessage">
+        <div class="box-container">
+            <img class="image" src="assets/images/check_mark_icon.png" alt="none" />
+            <p class="message">Message Sent!</p>
+        </div>
+        <br><p class="note">Thanks for completing the form. We'll be in touch soon!</p>
+    </div>
+    <div class="contact-form">
+        <h2>Contact Us</h2>
+        <form id="contactForm" action="#">
+            <div class="name-fields">
+                <div class="form-field">
+                    <label for="fname">First Name *</label>
+                    <input type="text" id="fname" name="firstname">
+                    <p class="error-message" id="fname-error"></p>
+                </div>
+                <div class="form-field">
+                    <label for="lname">Last Name *</label>
+                    <input type="text" id="lname" name="lastname">
+                    <p class="error-message" id="lname-error"></p>
+                </div>
+            </div>
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email">
+            <p class="error-message" id="email-error"></p>
+            <label>Query Type *</label>
+            <div class="query-type">
+                <input type="radio" id="general" name="query" value="general">
+                <label for="general">General Enquiry</label>
+                <input type="radio" id="support" name="query" value="support">
+                <label for="support">Support Request</label>
+            </div>
+            <p class="error-message" id="query-error"></p>
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" rows="5"></textarea>
+            <p class="error-message" id="message-error"></p>
+            <div class="consent">
+                <input type="checkbox" id="consent" name="consent">
+                <label for="consent">I consent to being contacted by the team *</label>
+            </div>
+            <p class="error-message" id="consent-error"></p>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        const form = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (validateForm()) {
+                setTimeout(() => {
+                    successMessage.classList.remove('hidden');
+                    form.reset();
+                    form.style.display = 'none';
+                }, 500);
+            }
+        });
+        
+        function validateForm() {
+            let isValid = true;
+            const fname = document.getElementById('fname');
+            const fnameError = document.getElementById('fname-error');
+            if (fname.value.trim() === '') {
+                fname.classList.add('error');
+                fnameError.textContent = 'This field is required';
+                isValid = false;
+            } else {
+                fname.classList.remove('error');
+                fnameError.textContent = '';
+            }
+            const lname = document.getElementById('lname');
+            const lnameError = document.getElementById('lname-error');
+            if (lname.value.trim() === '') {
+                lname.classList.add('error');
+                lnameError.textContent = 'This field is required';
+                isValid = false;
+            } else {
+                lname.classList.remove('error');
+                lnameError.textContent = '';
+            }
+            const email = document.getElementById('email');
+            const emailError = document.getElementById('email-error');
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email.value.trim() === '') {
+                email.classList.add('error');
+                emailError.textContent = 'This field is required';
+                isValid = false;
+            } else if (!emailPattern.test(email.value.trim())) {
+                email.classList.add('error');
+                emailError.textContent = 'Please enter a valid email address';
+                isValid = false;
+            } else {
+                email.classList.remove('error');
+                emailError.textContent = '';
+            }
+            const query = document.querySelector('input[name="query"]:checked');
+            const queryError = document.getElementById('query-error');
+            if (!query) {
+                queryError.textContent = 'Please select a query type';
+                isValid = false;
+            } else {
+                queryError.textContent = '';
+            }
+            const message = document.getElementById('message');
+            const messageError = document.getElementById('message-error');
+            if (message.value.trim() === '') {
+                message.classList.add('error');
+                messageError.textContent = 'This field is required';
+                isValid = false;
+            } else {
+                message.classList.remove('error');
+                messageError.textContent = '';
+            }
+            const consent = document.getElementById('consent');
+            const consentError = document.getElementById('consent-error');
+            if (!consent.checked) {
+                consentError.textContent = 'You must provide consent';
+                isValid = false;
+            } else {
+                consentError.textContent = '';
+            }
+            return isValid;
+        }
+    </script>
+</body>
+</html>

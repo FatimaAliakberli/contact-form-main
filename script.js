@@ -34,7 +34,17 @@ function validateForm() {
         fnameError.textContent = '';
     }
 
-    // Repeat similar validation for other fields
+    const lname = document.getElementById('lname');
+    const lnameError = document.getElementById("lname-error");
+    if (lname.value.trim()===''){
+        lname.classList.add("error");
+        lnameError.textContent = "This field is required";
+        isValid = false;
+    } else {
+        lname.classList.remove("error");
+        lnameError.textContent = '';
+    }
+
 
     // Email Validation
     const email = document.getElementById('email');
